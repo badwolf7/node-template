@@ -1,0 +1,27 @@
+{
+  "name": "node-template",
+  "description": "A base template for node express server",
+  "version": "1.0.0",
+  "keywords": [
+    "node",
+    "js",
+    "node.js",
+    "express",
+    "template"
+  ],
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "engines": {
+    "node": "6.2.2"
+  },
+  "contributors": [
+    {
+      "name": "Holly Springsteen",
+      "title": "Web Developer",
+      "email": "hhspringsteen@gmail.com",
+      "site": "hollyspringsteen.com"
+    }
+  ]
+}
