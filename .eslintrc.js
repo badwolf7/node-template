@@ -21,7 +21,10 @@ module.exports = {
     },
     "globals": {
         "app": true,
-        "hotlinks": true
+        "hotlinks": true,
+        "describe": true,
+        "it": true,
+        "after": true
     },
     "parserOptions": {
         "ecmaVersion": 6,
@@ -35,6 +38,7 @@ module.exports = {
         "valid-jsdoc": "error",
 
         // Best Practices
+        "default-case": "off",
         "no-empty-function": "error",
         "no-param-reassign": "warn",
         "vars-on-top": "warn",
@@ -51,6 +55,7 @@ module.exports = {
 
         // Stylistic Issues
         "comma-dangle": "error",
+        "eol-last": "off",
         "func-names": "off",
         "indent": ["error", 2],
         "max-depth": ["error", 6],
@@ -65,6 +70,6 @@ module.exports = {
         "arrow-spacing": "error",
         "no-duplicate-imports": "error",
         "no-useless-constructor": "error",
-        "object-shorthand": [2, "consistent"]
+        "object-shorthand": ["warn", "never"]
     }
 };
