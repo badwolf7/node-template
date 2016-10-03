@@ -12,7 +12,9 @@
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
-    "dev": "node-dev server.js"
+    "dev": "node-dev server.js",
+    "lint": "./node_modules/.bin/eslint ./**/*.js",
+    "test": "./node_modules/karma/bin/karma start"
   },
   "engines": {
     "node": "6.2.2"
@@ -22,7 +24,7 @@
       "name": "Holly Springsteen",
       "title": "Web Developer",
       "email": "hhspringsteen@gmail.com",
-      "site": "hollyspringsteen.com"
+      "site": "hollyos.com"
     }
   ],
   "dependencies": {
@@ -49,12 +51,17 @@
     "eslint": "^3.7.0",
     "eslint-config-airbnb": "^12.0.0",
     "eslint-plugin-import": "^2.0.0",
+    "eslint-plugin-jsx-a11y": "^2.2.2",
+    "eslint-plugin-react": "^6.3.0",
     "gulp": "^3.9.1",
+    "gulp-autoprefixer": "^3.1.1",
     "gulp-changed": "^1.3.2",
     "gulp-concat": "^2.6.0",
     "gulp-eslint": "^3.0.1",
     "gulp-imagemin": "^3.0.3",
     "gulp-jshint": "^2.0.1",
+    "gulp-livereload": "^3.8.1",
+    "gulp-minify-css": "^1.2.4",
     "gulp-mocha": "^3.0.1",
     "gulp-next": "^1.0.4",
     "gulp-nodemon": "^2.2.1",
@@ -64,6 +71,12 @@
     "jshint": "^2.9.3",
     "jshint-stylish": "^2.2.1",
     "karma": "^1.3.0",
+    "karma-chrome-launcher": "^2.0.0",
+    "karma-firefox-launcher": "^1.0.0",
+    "karma-ie-launcher": "^1.0.0",
+    "karma-mocha": "^1.2.0",
+    "karma-opera-launcher": "^1.0.0",
+    "karma-safari-launcher": "^1.0.0",
     "mocha": "^3.1.0",
     "should": "^11.1.0",
     "supertest": "^2.0.0"

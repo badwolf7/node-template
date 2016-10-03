@@ -1,11 +1,8 @@
 /**
  * Main express server init module
  *
- * @author      Holly Springsteen
- * @version     1.0.0
+ * @author Holly Springsteen
  */
-
-'use strict';
 
 // Packages
 const express = require('express');
@@ -16,7 +13,6 @@ const cluster = require('cluster');
 const os = require('os');
 const fs = require('fs');
 const compression = require('compression');
-const http = require('http');
 const colors = require('colors');
 const uuid = require('uuid');
 
@@ -33,23 +29,21 @@ const oneHour = 3600000;
 const oneDay = oneHour * 24;
 const oneYear = oneDay * 365;
 
-// Adding httpServer to Skeleton
-const httpServer = http.createServer(app);
-
 // Application settings
 app.engine('ejs', ejs);
 
 // Load views
-fs.readdirSync("./views").forEach(function(file) {
-  if(file.slice(-3) == "ejs"){
-    file = file.split(".")[0];
-    hotlinks[file] = '/'+file;
+fs.readdirSync('./views').forEach((file) => {
+  if (file.slice(-3) === 'ejs') {
+    const fileSplit = file.split('.')[0];
+    hotlinks[fileSplit] = `/${fileSplit}`;
   }
 });
 
+// Routes
+const routes = require('./controllers/routes')();
 
-
-cluster.on('exit', (worker, code, signal) => {
+cluster.on('exit', (worker, code) => {
   console.warn(`(code: ${code})`.magenta + ` Worker ${worker.id} ${worker.state} | pid: ${worker.process.pid}`.red);
 
   // Replace the dead worker, we're not sentimental.
@@ -68,14 +62,14 @@ if (cluster.isMaster) {
 
   // Static Files
   app.use('/views', express.static(`${__dirname}/views`, {
-    maxAge: 1
+    maxAge: 1,
   }));
   app.use('/public', express.static(`${__dirname}/public`, {
-    maxAge: 1
+    maxAge: 1,
   }));
   app.use(compression({
     chunkSize: 16384,
-    level: 9
+    level: 9,
   }));
 
   // Express session
@@ -88,22 +82,26 @@ if (cluster.isMaster) {
     saveUninitialized: true,
     maxAge: oneYear,
     cookie: {
-      secure: true
-    }
+      secure: true,
+    },
   }));
 
   // Static Files
   app.use('/public', express.static(path.join(__dirname, '/api/public'), { maxAge: 1 }));
 
-  // Load the controllers
-  fs.readdirSync("./controllers").forEach((file) => {
-    if (file.slice(-2) == "js") {
-      require(`./controllers/${file}`)();
+  // starts server on specified port
+  const server = app.listen(port, hostname, () => {
+    if (cluster.worker.id === numCPUs) {
+      console.log('Application started successfully'.green);
+      console.log('Port '.cyan, colors.magenta(port));
+      console.log('Workers '.cyan, colors.magenta(numCPUs));
     }
   });
 
-  // starts server on specified port
-  httpServer.listen(port, () => {
-    console.log(`\n------------------------------------------------------------\n|   Server Listening on port ${port}                          |\n------------------------------------------------------------`);
+  // Handle unexpected errors
+  process.on('uncaughtException', (error) => {
+    console.error('Uncaught Exception'.bgRed.white, error);
   });
+
+  module.exports = server;
 }

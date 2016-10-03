@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <!-- Meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <!-- Theme -->
+    <!-- Chrome, Firefox OS and Opera -->
+    <meta name="theme-color" content="#0D1111">
+    <!-- Windows Phone -->
+    <meta name="msapplication-navbutton-color" content="#0D1111">
+    <!-- iOS Safari -->
+    <meta name="apple-mobile-web-app-status-bar-style" content="#0D1111">
+
+  <!-- Tab -->
+    <% if(title){ %>
+    <title><%= title %></title>
+    <% }else{ %>
+    <title>Node Template</title>
+    <% } %>
+
+    <link rel="icon" type="image/png" href="/public/img/favicon.png" />
+
+  <!-- Fonts -->
+  <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800|Quicksand:400,700,300|Anonymous+Pro:400,700' rel='stylesheet' type='text/css'>
+
+  <!-- CSS -->
+    <link rel="stylesheet" href="/public/css/main.css">
+  </head>
+
+
+  <body>
+    <%- body %>
+
+    <!-- JAVASCRIPT -->
+    <script type="text/javascript" src="/public/js/main.js"></script>
+  </body>
+</html>
